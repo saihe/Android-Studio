@@ -11,6 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ProgressBar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatDelegate;
 
 /*
 import android.os.Handler;
@@ -37,6 +42,7 @@ public class MyActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(WeatherForecast data){
             super.onPostExecute(data);
+            progress.setVisibility(View.GONE);
             if(data != null){
                 //textView.setText(data);
                 //textView.setText(data.location.area + " " + data.location.prefecture + " " + data.location.city);
