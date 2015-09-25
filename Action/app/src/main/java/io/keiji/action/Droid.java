@@ -50,4 +50,8 @@ public class Droid {
 
         rect.offset(0, -Math.round(acceleration));
     }
+
+    public void shutdown(){
+        acceleration = 0;
+    }
 }

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.os.Handler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +40,24 @@ public class GameView extends SurfaceView implements Droid.Callback,
 
     private final Random rand = new Random();
 
+    public interface Callback{
+        public void onGameOver();
+    }
+
+    private Callback callback;
+
+    public void setCallback(Callback callback){
+        this.callback = callback;
+    }
+
+    private final Handler handler;
+
+    private boolean isGameOver;
+
     public GameView(Context context) {
         super(context);
+
+        handler = new Handler();
 
         getHolder().addCallback(this);
     }
@@ -105,7 +122,12 @@ public class GameView extends SurfaceView implements Droid.Callback,
 
             boolean horizontal = !(droid.rect.left >= ground.rect.right || droid.rect.right <= ground.rect.left);
             if (horizontal) {
-                return ground.rect.top - droid.rect.bottom;
+                int distanceFromGround = ground.rect.top - droid.rect.bottom;
+                if(distanceFromGround < 0){
+                    gameOver();
+                    return Integer.MAX_VALUE;
+                }
+                return distanceFromGround;
             }
         }
 
@@ -191,5 +213,21 @@ public class GameView extends SurfaceView implements Droid.Callback,
         drawThread.isFinished = true;
         drawThread = null;
         return true;
+    }
+
+    private void gameOver(){
+        if (isGameOver){
+            return;
+        }
+        isGameOver = true;
+
+        droid.shutdown();
+
+        handler.post(new Runnable(){
+            @Override
+            public void run(){
+                callback.onGameOver();
+            }
+        });
     }
 }
