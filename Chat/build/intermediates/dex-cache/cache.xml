@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\saito.kyohei\AndroidStudioProjects\Chat\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="C:\Users\saito.kyohei\AndroidStudioProjects\Chat\app\build\intermediates\pre-dexed\debug\classes-9583a38c287262e03afc32532eb65e28f53f6b02.jar" />
-    </item>
-    <item
-        jar="C:\Users\saito.kyohei\AndroidStudioProjects\Chat\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="C:\Users\saito.kyohei\AndroidStudioProjects\Chat\app\build\intermediates\pre-dexed\debug\classes-060afa7b45044baaae23874c824c1815047f4e50.jar" />
-    </item>
-    <item
         jar="C:\AndroidSDK\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="C:\Users\saito.kyohei\AndroidStudioProjects\Chat\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-fb775423d8ae5f7ee78c997a3ba67c158f7299bd.jar" />
+        <dex dex="C:\Users\saito.kyohei\Desktop\Android-Studio\Chat\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-fb775423d8ae5f7ee78c997a3ba67c158f7299bd.jar" />
     </item>
     <item
-        jar="C:\Users\saito.kyohei\AndroidStudioProjects\Chat\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jar="C:\Users\saito.kyohei\Desktop\Android-Studio\Chat\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="C:\Users\saito.kyohei\AndroidStudioProjects\Chat\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-978bc8b18f17c57561bbbd5c819f33c0ee7750e2.jar" />
+        <dex dex="C:\Users\saito.kyohei\Desktop\Android-Studio\Chat\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-ff3eb64238554304259cac9ab172b77aa7775767.jar" />
+    </item>
+    <item
+        jar="C:\Users\saito.kyohei\Desktop\Android-Studio\Chat\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\saito.kyohei\Desktop\Android-Studio\Chat\app\build\intermediates\pre-dexed\debug\classes-903251eb4092de5faf0eeab56b118586d30f488a.jar" />
+    </item>
+    <item
+        jar="C:\Users\saito.kyohei\Desktop\Android-Studio\Chat\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="C:\Users\saito.kyohei\Desktop\Android-Studio\Chat\app\build\intermediates\pre-dexed\debug\classes-073f7054af3968a2f6a33a8bb86df7f063e0d107.jar" />
     </item>
 
 </items>

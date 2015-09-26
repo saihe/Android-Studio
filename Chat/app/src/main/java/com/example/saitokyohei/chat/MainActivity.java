@@ -61,8 +61,8 @@ public class MainActivity extends Activity {
     }
 
     //Googleドライブに接続するメソッド
+    /*
     private static String URL = "https://drive.google.com/drive/folders/0B3s2I7Ksr9ZmTk1BTFlpS3F4cEE";
-
     private static String getWeather(String pointId) throws IOException {
         // リクエスト送信
         URL requestUrl = new URL(URL);
@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
         reader.close();
         //return line;これでもOKっぽい
         return tmpResult.toString();
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
