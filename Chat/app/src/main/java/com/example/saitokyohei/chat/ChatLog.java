@@ -14,6 +14,7 @@ public class ChatLog {
     //ログ一行分
     private static String[] log = new String[3];
 
+
     //現在日時をyyyy/MM/dd HH:mm:ss形式で取得する.
     public static String getLogTime(){
         final DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

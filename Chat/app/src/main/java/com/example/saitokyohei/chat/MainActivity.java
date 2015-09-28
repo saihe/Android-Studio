@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
     //ハンドラー
     private Handler handler;
     //アカウント
-    private String user = "Kyontaro";
+    private String user;
 
 
 
@@ -56,11 +56,11 @@ public class MainActivity extends Activity {
         i ++;
     }
 
-    //ログ書き出し・読み込み
+    /*//ログ書き出し・読み込み
     //setは保存されたログのオブジェクト一覧に書き出す
     private String setAndGetLog(String[] log){
         try{
-            final String[] set = connectLog.setLog(log);
+            final ArrayList set = connectLog.setLog(log);
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -83,19 +83,18 @@ public class MainActivity extends Activity {
             Log.e("", e.toString());
         }
         return "Hoge";
-    }
-
+    }*/
 
     //ログに接続
-    final Thread connection = new Thread(){
+    Thread connection = new Thread(){
         @Override
         public void run(){
             try{
-                final String get = connectLog.connectLog();
+                final String connect = connectLog.connectLog();
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        addTextView(get);
+                        addTextView(connect);
                     }
                 });
             } catch (IOException e) {
@@ -110,7 +109,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //ログに接続開始
-        connection.start();
+        //connection.start();
         //ID:submitボタンをpushSubmitという変数と関連付ける
         pushSubmit = (Button) findViewById(R.id.submit);
         //ID:editViewをevという変数に関連付ける
@@ -130,17 +129,20 @@ public class MainActivity extends Activity {
                     //String型の変数に入力された文字を代入する
                     String str = ev.getText().toString();
                     //入力された文字・機器ID・時間を配列にする
+                    user = "Kyontaro";
                     log = ChatLog.createLog(user, str);
                     //空だったらtrue
                     //String le = String.valueOf(log.isEmpty());
                     //Log.d("", log);
                     ArrayList al = new ArrayList();
                     al.add(log);
-                    setAndGetLog(log);
+                    String get = connectLog.getLog();
+                    //setAndGetLog(log);
                     //入力フィールドを空にしてtextViewの文字を入力された文字に変更する
                     ev.setText("");
                     //TextVeiw作成・入力文字挿入・カウントアップ
-                    addTextView("log:" + log[0] + "/" + log[1] + "/" + log[2]);
+                    //addTextView("log:" + log[0] + "/" + log[1] + "/" + log[2]);
+                    addTextView("get: " + get);
                 } catch (Exception e) {
                     //エラーメッセージを出す
                     String emsg = e.toString();
