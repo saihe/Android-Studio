@@ -13,16 +13,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+
 import java.text.DateFormat;
-import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+
+import android.os.Handler;
 
 public class MainActivity extends Activity {
 
@@ -34,19 +34,16 @@ public class MainActivity extends Activity {
     private LinearLayout ll;
     //int型の変数
     private int i = 0;
-    //String型の変数
-    private String logTime;
-    //String型のURL
-    private static String URL = "http://drive.google.com/drive/folders/0B3s2I7Ksr9ZmTk1BTFlpS3F4cEE";
+    //ChatLog.javaのインスタンス
+    private ArrayList chatLog;
+    //ログ一行分
+    private String[] log;
+    //ハンドラー
+    private Handler handler;
+    //アカウント
+    private String user = "Kyontaro";
 
 
-    //現在日時をyyyy/MM/dd HH:mm:ss形式で取得する.
-    public String getLogTime(){
-        final DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        final Date date = new Date(System.currentTimeMillis());
-        logTime =  df.format(date);
-        return logTime;
-    }
 
     //TextViewを追加するメソッド
     private void addTextView(String msg){
@@ -55,67 +52,100 @@ public class MainActivity extends Activity {
         tv.setText(msg);
         //ScrollViewの子のLinearLayoutのiDを取得しViewを追加
         ll = (LinearLayout) findViewById(R.id.sRelativeLayout);
-        ll.addView(tv);
+        ll.addView(tv, i);
+        i ++;
     }
 
-    //Googleドライブに接続するメソッド
-    private static String getConnection() throws IOException {
-        //リクエスト送信
-        URL requestUrl = new URL(URL);
-        HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
-        /*InputStream input = connection.getInputStream();
-
-        // 結果取得
-        BufferedReader reader = new BufferedReader(new InputStreamReader(
-                input, "UTF-8"));
-        String line = reader.readLine();
-        StringBuilder tmpResult = new StringBuilder(line);
-
-        reader.close();*/
-        //return line;これでもOKっぽい
-        //return tmpResult.toString();
+    //ログ書き出し・読み込み
+    //setは保存されたログのオブジェクト一覧に書き出す
+    private String setAndGetLog(ArrayList log){
+        try{
+            final ArrayList set = connectLog.setLog(log);
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    addTextView("set: " + set);
+                }
+            });
+        }catch (IOException e){
+            Log.e("", e.toString());
+        }
+        //getは保存されたログのオブジェクト一覧を出す
+        try{
+            final String get = connectLog.getLog();
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    addTextView(get);
+                }
+            });
+        } catch (IOException e) {
+            Log.e("", e.toString());
+        }
         return "Hoge";
     }
+
+
+    //ログに接続
+    final Thread connection = new Thread(){
+        @Override
+        public void run(){
+            try{
+                final String get = connectLog.connectLog();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        addTextView(get);
+                    }
+                });
+            } catch (IOException e) {
+                Log.e("", e.toString());
+            }
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //ログにonCreate()の処理を表示する
-        Log.d("", "onCreate()");
-
+        //ログに接続開始
+        connection.start();
         //ID:submitボタンをpushSubmitという変数と関連付ける
         pushSubmit = (Button) findViewById(R.id.submit);
         //ID:editViewをevという変数に関連付ける
         ev = (EditText) findViewById(R.id.editText);
+        //ハンドラーインスタンス
+        handler = new Handler();
+
 
         //pushSubmitがクリックされたら検知し、検知したら実行
         pushSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    //LogTime入手
-                    logTime = getLogTime();
                     //ソフトキーボードを非表示にする
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     //String型の変数に入力された文字を代入する
                     String str = ev.getText().toString();
+                    //入力された文字・機器ID・時間を配列にする
+                    log = ChatLog.createLog(user, str);
+                    //空だったらtrue
+                    //String le = String.valueOf(log.isEmpty());
+                    //Log.d("", log);
+                    ArrayList al = new ArrayList();
+                    al.add(log);
+                    setAndGetLog(al);
                     //入力フィールドを空にしてtextViewの文字を入力された文字に変更する
                     ev.setText("");
                     //TextVeiw作成・入力文字挿入・カウントアップ
-                    addTextView(str);
-                    addTextView(logTime);
-                    try {
-                        getConnection();
-                        addTextView("Connect!");
-                    }catch (Exception e){
-                        addTextView("Hoge");
-                    }
-                    i++;
-                }catch (Exception e){
-                    //TextView作成・Hoge挿入
-                    addTextView("Error!");
+                    addTextView("log:" + log);
+                } catch (Exception e) {
+                    //エラーメッセージを出す
+                    String emsg = e.toString();
+                    Log.e("", emsg);
+                    addTextView("View error: " + emsg);
                 }
             }
         });
