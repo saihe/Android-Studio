@@ -58,9 +58,9 @@ public class MainActivity extends Activity {
 
     //ログ書き出し・読み込み
     //setは保存されたログのオブジェクト一覧に書き出す
-    private String setAndGetLog(ArrayList log){
+    private String setAndGetLog(String[] log){
         try{
-            final ArrayList set = connectLog.setLog(log);
+            final String[] set = connectLog.setLog(log);
             handler.post(new Runnable() {
                 @Override
                 public void run() {
@@ -136,11 +136,11 @@ public class MainActivity extends Activity {
                     //Log.d("", log);
                     ArrayList al = new ArrayList();
                     al.add(log);
-                    setAndGetLog(al);
+                    setAndGetLog(log);
                     //入力フィールドを空にしてtextViewの文字を入力された文字に変更する
                     ev.setText("");
                     //TextVeiw作成・入力文字挿入・カウントアップ
-                    addTextView("log:" + log);
+                    addTextView("log:" + log[0] + "/" + log[1] + "/" + log[2]);
                 } catch (Exception e) {
                     //エラーメッセージを出す
                     String emsg = e.toString();
