@@ -95,6 +95,7 @@ public class MainActivity extends Activity {
     Thread connection = new Thread(){
         @Override
         public void run() {
+            Log.d("", "接続スレ");
             try {
                 final String connect = connectLog.connectLog();
                 handler.post(new Runnable() {
@@ -109,6 +110,37 @@ public class MainActivity extends Activity {
         }
     };
 
+    /*
+     *ログ受け取り
+     */
+    Thread getLog = new Thread(){
+        @Override
+        public void run(){
+            Log.d("", "ログ受け取りスレ");
+            try{
+                final String getLog = connectLog.getLog();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        addTextView(getLog);
+                    }
+                });
+            } catch (IOException e) {
+                Log.e("", e.toString());
+            }
+        }
+    };
+
+    /*
+     * ログ送信
+     */
+    Thread setLog = new Thread(){
+        @Override
+        public void run(){
+            Log.d("", "ログ送信スレ");
+        }
+    };
+
 
 
     @Override
@@ -117,6 +149,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         //ログに接続開始
         connection.start();
+
+        getLog.start();
         //ID:submitボタンをpushSubmitという変数と関連付ける
         pushSubmit = (Button) findViewById(R.id.submit);
         //ID:editViewをevという変数に関連付ける
