@@ -34,18 +34,18 @@ public class MainActivity extends Activity {
     private LinearLayout ll;
     //int型の変数
     private int i = 0;
-    //ChatLog.javaのインスタンス
-    private ArrayList chatLog;
     //ログ一行分
-    private String[] log;
+    private ArrayList log;
     //ハンドラー
     private Handler handler;
     //アカウント
-    private String user;
+    private String user = "Kyontaro";
 
 
 
-    //TextViewを追加するメソッド
+    /*
+     *TextViewを追加するメソッド
+     */
     private void addTextView(String msg){
         //テキスト作成・挿入
         TextView tv = new TextView(this);
@@ -56,19 +56,22 @@ public class MainActivity extends Activity {
         i ++;
     }
 
-    /*//ログ書き出し・読み込み
-    //setは保存されたログのオブジェクト一覧に書き出す
-    private String setAndGetLog(String[] log){
+    /*
+     *ログ書き出し・読み込み
+     */
+    private String setAndGetLog(ArrayList log){
         try{
+            //setは保存されたログのオブジェクト一覧に書き出す
             final ArrayList set = connectLog.setLog(log);
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    addTextView("set: " + set);
+                    addTextView("set: " + set.get(0));
+                    Log.d("", "Hoge7");
                 }
             });
         }catch (IOException e){
-            Log.e("", e.toString());
+            Log.e("", "setLogError: " + e.toString());
         }
         //getは保存されたログのオブジェクト一覧を出す
         try{
@@ -77,19 +80,22 @@ public class MainActivity extends Activity {
                 @Override
                 public void run() {
                     addTextView(get);
+                    Log.d("", "Hoge8");
                 }
             });
         } catch (IOException e) {
-            Log.e("", e.toString());
+            Log.e("", "getLogError: " + e.toString());
         }
         return "Hoge";
-    }*/
+    }
 
-    //ログに接続
+    /*
+     *ログに接続
+     */
     Thread connection = new Thread(){
         @Override
-        public void run(){
-            try{
+        public void run() {
+            try {
                 final String connect = connectLog.connectLog();
                 handler.post(new Runnable() {
                     @Override
@@ -104,12 +110,13 @@ public class MainActivity extends Activity {
     };
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //ログに接続開始
-        //connection.start();
+        connection.start();
         //ID:submitボタンをpushSubmitという変数と関連付ける
         pushSubmit = (Button) findViewById(R.id.submit);
         //ID:editViewをevという変数に関連付ける
@@ -117,32 +124,37 @@ public class MainActivity extends Activity {
         //ハンドラーインスタンス
         handler = new Handler();
 
-
-        //pushSubmitがクリックされたら検知し、検知したら実行
+        /*
+         *pushSubmitがクリックされたら検知し、検知したら実行
+         */
         pushSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("", "Hoge1");
                 try {
                     //ソフトキーボードを非表示にする
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                     //String型の変数に入力された文字を代入する
                     String str = ev.getText().toString();
+                    Log.d("", "Hoge2");
                     //入力された文字・機器ID・時間を配列にする
-                    user = "Kyontaro";
-                    log = ChatLog.createLog(user, str);
-                    //空だったらtrue
-                    //String le = String.valueOf(log.isEmpty());
-                    //Log.d("", log);
-                    ArrayList al = new ArrayList();
-                    al.add(log);
-                    String get = connectLog.getLog();
-                    //setAndGetLog(log);
+                    //log.add(ChatLog.setChatLog(user, str));
+                    log = ChatLog.setChatLog(user, str);
+                    Log.d("", "Hoge5");
+                    Log.d("", log.get(0).toString());
+                    //String get = connectLog.getLog();
+                    //ログに配列を書き込む・呼び出す
+                    setAndGetLog(log);
+                    Log.d("", "Hoge9");
                     //入力フィールドを空にしてtextViewの文字を入力された文字に変更する
                     ev.setText("");
+                    Log.d("", "Hoge10");
                     //TextVeiw作成・入力文字挿入・カウントアップ
-                    //addTextView("log:" + log[0] + "/" + log[1] + "/" + log[2]);
-                    addTextView("get: " + get);
+                    //addTextView("log:" + log.get(0) + "/" + log.get(1) + "/" + log.get(2));
+                    //addTextView("get: " + get);
+                    addTextView("str: " + str);
+                    Log.d("", "Hoge11");
                 } catch (Exception e) {
                     //エラーメッセージを出す
                     String emsg = e.toString();

@@ -1,8 +1,11 @@
 package com.example.saitokyohei.chat;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.concurrent.locks.Lock;
 
 /**
  * Created by saito.kyohei on 2015/09/28.
@@ -25,10 +29,12 @@ public class connectLog {
 
     //String型のURL Googleドライブ内のChatLogファイルのURL
     //private static String URL = "https://drive.google.com/file/d/0B3s2I7Ksr9ZmUUxOSzhZc2h1cG8/view?usp=sharing";
+    //private static String URL = "http://drive.google.com/open?id=0B3s2I7Ksr9ZmUUxOSzhZc2h1cG8";
     //private static String URL = "http://drive.google.com/drive/folders/0B3s2I7Ksr9ZmTk1BTFlpS3F4cEE";
-    //private static String URL = "https://drive.google.com/file/d/0B3s2I7Ksr9ZmUUxOSzhZc2h1cG8/view?usp=sharing";
     //private static String URL = "https://drive.google.com/file/d/0B3s2I7Ksr9ZmUUxOSzhZc2h1cG8/view?ts=5608a60e";
-    private static String URL = "http://weather.livedoor.com/forecast/webservice/json/v1?city=130010";
+    //private static String URL = "http://weather.livedoor.com/forecast/webservice/json/v1?city=130010";
+    private static String URL = "http://saihe.sakura.ne.jp/ChatLog.txt";
+    //private static String URL = "http://saihe.sakura.ne.jp/portfolio/style.css";
 
     protected static String connectLog() throws IOException {
         //リクエスト送信
@@ -45,22 +51,26 @@ public class connectLog {
         URL requestUrl = new URL(URL);
         HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
         //POST可能にする
-        connection.setDoOutput(true);
-
+        //connection.setDoOutput(true);
         // 結果取得
         InputStream input = connection.getInputStream();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(
-                input, "UTF-8"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
         String line = reader.readLine();
+        //StringBuilder tmpResult = new StringBuilder(line);
         StringBuilder tmpResult = new StringBuilder(line);
-
+        while(line  != null) {
+            line = reader.readLine();
+            tmpResult.append(line);
+        }
         reader.close();
-        //return line;これでもOKっぽい
-        return tmpResult.toString() ;
+        //return line;//これでもOKっぽい
+        //Log.i("", tmpResult.toString());
+        Log.d("", "GetLog: " + tmpResult.toString());
+        return  tmpResult.toString();
         //return "Get Log";
     }
 
-    /*protected static ArrayList setLog(String[] log) throws IOException {
+    protected static ArrayList setLog(ArrayList log) throws IOException {
         /*URL requestUrl = new URL(URL);
         HttpURLConnection connection = (HttpURLConnection) requestUrl.openConnection();
         //POST可能にする
@@ -94,8 +104,9 @@ public class connectLog {
         bw.newLine();
         bw.write("お元気ですか？");
         bw.newLine();
-        bw.close();
-        ArrayList chatLog = new ArrayList(Arrays.asList(log));
-        return chatLog;
-    }*/
+        bw.close();*/
+        Log.d("", "Hoge6");
+        Log.d("", "SetLog: " + log.get(0));
+        return log;
+    }
 }

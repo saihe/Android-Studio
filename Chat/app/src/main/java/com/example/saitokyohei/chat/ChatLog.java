@@ -1,5 +1,7 @@
 package com.example.saitokyohei.chat;
 
+import android.util.Log;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ public class ChatLog {
     //String型の変数
     private static String logTime;
     //ログ一行分
-    private static String[] log = new String[3];
+    private static ArrayList<String> log = new ArrayList<String>();
 
 
     //現在日時をyyyy/MM/dd HH:mm:ss形式で取得する.
@@ -23,13 +25,15 @@ public class ChatLog {
         return logTime;
     }
 
-    protected static String[] createLog(String user, String str){
+    public static ArrayList<String> setChatLog(String user, String msg){
         //ログ一行分の配列
-        logTime = getLogTime();
-        log[0] = logTime;
-        log[1] = user;
-        log[2] = str;
+        String time = getLogTime();
+        Log.d("", "Hoge3");
+        log.add(0, time);
+        log.add(1, user);
+        log.add(2, msg);
+        Log.d("", "LogArray: " + log.get(0) + "/" + log.get(1) + "/" + log.get(2));
+        Log.d("", "Hoge4");
         return log;
-        //return str;
     }
 }
