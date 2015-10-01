@@ -18,7 +18,7 @@ public class ChatLog {
     //String型の変数
     private static String logTime;
     //ログ一行分
-    private static ArrayList<String> log = new ArrayList<String>();
+    private static ArrayList<String> log;
     //全ログ
     private static HashMap<String, ArrayList<String>> chatLog = new HashMap<String, ArrayList<String>>();
 
@@ -32,12 +32,13 @@ public class ChatLog {
 
     public static HashMap<String, ArrayList<String>> setChatLog(String user, String msg){
         //ログ一行分の配列
+        log = new ArrayList<String>();
         String time = getLogTime();
         log.add(0, user);
         log.add(1, msg);
         chatLog.put(time, log);
         for (String key: chatLog.keySet()) {
-            Log.d("", key + chatLog.get(key));
+            Log.d("", key + chatLog.get(key) + "\n");
         }
         return chatLog;
     }

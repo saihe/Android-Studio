@@ -2,6 +2,7 @@ package com.example.saitokyohei.chat;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,9 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,7 +42,7 @@ public class MainActivity extends Activity {
     //int型の変数
     private int i = 0;
     //ログ一行分
-    private ArrayList log;
+    private ArrayList<String> log = new ArrayList<String>();
     //全ログ
     private HashMap<String, ArrayList<String>> chatLog = new HashMap<String, ArrayList<String>>();
     //ハンドラー
@@ -48,21 +52,67 @@ public class MainActivity extends Activity {
 
 
 
+
     /*
      *TextViewを追加するメソッド
      */
     private void addTextView(String msg){
         //テキスト作成・挿入
-        /*
         TextView tv = new TextView(this);
         tv.setText(msg);
         //ScrollViewの子のLinearLayoutのiDを取得しViewを追加
         ll = (LinearLayout) findViewById(R.id.sRelativeLayout);
         ll.addView(tv, i);
         i ++;
-        */
-        tv = (TextView) findViewById(R.id.textView);
-        tv.setText(msg);
+    }
+
+    private void editTextview(ArrayList<String> log){
+        TextView tv = new TextView(this);
+        //tv = (TextView) findViewById(R.id.textView);
+        for(int k = 0; k < log.size(); k++){
+            tv.setText(log.get(k) + "\n");
+            i ++;
+            ll = (LinearLayout) findViewById(R.id.sRelativeLayout);
+            ll.addView(tv, i);
+        }
+    }
+
+    private void inputClick(){
+        try{
+            Log.d("", "読み込み開始");
+            FileInputStream in = openFileInput( "test.txt" );
+            Log.d("", "test.txtを読み込み");
+            BufferedReader reader = new BufferedReader( new InputStreamReader( in , "UTF-8") );
+            String tmp;
+            while( (tmp = reader.readLine()) != null ){
+                Log.d("", tmp);
+                log.add(tmp);
+                editTextview(log);
+            }
+            Log.d("", "LogCatとTextViewに書き出し");
+            reader.close();
+        }catch( IOException e ){
+            e.printStackTrace();
+            Log.e("", "読み込み失敗");
+        }
+    }
+
+    private void outputClick(){
+        //保存
+        try{
+            Log.d("", "保存開始");
+            FileOutputStream out = openFileOutput( "test.txt", MODE_PRIVATE );
+            Log.d("", "test.txtを読み込み");
+            for(String key: chatLog.keySet()){
+                out.write(key.getBytes());
+                out.write(chatLog.get(key).get(0).getBytes());
+                out.write(chatLog.get(key).get(1).getBytes());
+            }
+            Log.d("", "書き出し");
+        }catch(IOException e ){
+            e.printStackTrace();
+            Log.e("", "保存失敗");
+        }
     }
 
     /*
@@ -122,25 +172,6 @@ public class MainActivity extends Activity {
             Log.d("", "StopConnection");
         }
     }
-    /*
-    Thread connection = new Thread(){
-        @Override
-        public void run() {
-            Log.d("", "接続スレ");
-            try {
-                final String connect = connectLog.connectLog();
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        addTextView(connect);
-                    }
-                });
-            } catch (IOException e) {
-                Log.e("", e.toString());
-            }
-        }
-    };
-    */
 
     /*
      *ログ受け取り
@@ -177,25 +208,6 @@ public class MainActivity extends Activity {
             Log.d("", "StopGetLog");
         }
     }
-    /*
-    Thread getLog = new Thread(){
-        @Override
-        public void run(){
-            Log.d("", "ログ受け取りスレ");
-            try{
-                final String getLog = connectLog.getLog();
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        addTextView(getLog);
-                    }
-                });
-            } catch (IOException e) {
-                Log.e("", e.toString());
-            }
-        }
-    };
-    */
 
     /*
      * ログ送信
@@ -226,19 +238,6 @@ public class MainActivity extends Activity {
             Log.d("", "StopGetLog");
         }
     }
-    /*
-    Thread setLog = new Thread(){
-        @Override
-        public void run(){
-            Log.d("", "ログ送信スレ");
-            try{
-                connectLog.setLog(log);
-            } catch (IOException e) {
-                Log.e("", e.toString());
-            }
-        }
-    };
-    */
 
 
 
@@ -247,16 +246,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //ログに接続開始
-        GetLog getLog =new GetLog();
-        getLog.start();
-
-
+        /*GetLog getLog =new GetLog();
+        getLog.start();*/
+        log.add("Chat");
+        inputClick();
         //ID:submitボタンをpushSubmitという変数と関連付ける
         pushSubmit = (Button) findViewById(R.id.submit);
         //ID:editViewをevという変数に関連付ける
         ev = (EditText) findViewById(R.id.editText);
         //ハンドラーインスタンス
         handler = new Handler();
+
 
         /*
          *pushSubmitがクリックされたら検知し、検知したら実行
@@ -275,30 +275,15 @@ public class MainActivity extends Activity {
                     /*
                      *追加したやつ
                      */
-                    try{
-                        FileOutputStream out = openFileOutput( "chatLog.txt", MODE_PRIVATE );
-                        out.write( str.getBytes()   );
-                    }catch( IOException e ){
-                        e.printStackTrace();
-                    }
-                    for (String key: chatLog.keySet()) {
-                        log = chatLog.get(key);
-                        Log.d("", key + chatLog.get(key));
-                        addTextView("LogTime: " + key);
-                        addTextView("LogUser: " + log.get(0));
-                        addTextView("LogStr: " + log.get(1));
-                    }
-                    try{
-                        FileOutputStream out = openFileOutput( "chatLog.txt", MODE_PRIVATE );
-                        out.write( str.getBytes()   );
-                    }catch( IOException e ){
-                        e.printStackTrace();
-                    }
+                    //保存
+                    outputClick();
+                    //読み込み
+                    inputClick();
                     /*
                      *ここまで
                      */
                     //ログに配列を書き込む・呼び出す
-                    setAndGetLog();
+                    //setAndGetLog();
                     //入力フィールドを空にしてtextViewの文字を入力された文字に変更する
                     ev.setText("");
                     //TextVeiw作成・入力文字挿入・カウントアップ

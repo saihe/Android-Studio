@@ -25,8 +25,8 @@ import java.util.HashMap;
 public class ConnectLog {
 
     //String型のURL Googleドライブ内のChatLogファイルのURL
-    //private static String URL = "http://saihe.sakura.ne.jp/Log.txt";
-    private static String URL = "aa";
+    private static String URL = "http://saihe.sakura.ne.jp/Log.txt";
+    //private static String URL = "https://www.dropbox.com/s/cg4qijnvs4r2eva/Log.txt?dl=0";
     //private static String URL = "https://drive.google.com/open?id=0B3s2I7Ksr9ZmaVd1TXI2aDhQbEE";
     //private static String URL = "https://drive.google.com/file/d/0B3s2I7Ksr9ZmaVd1TXI2aDhQbEE/view?usp=sharing";
     //private static String URL = "https://drive.google.com/file/d/0B3s2I7Ksr9ZmaVd1TXI2aDhQbEE";

@@ -33,12 +33,6 @@
             android:weightSum="1"
             android:id="@+id/sRelativeLayout">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/textView" />
         </LinearLayout>
 
     </ScrollView>
@@ -50,7 +44,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/submit"
         android:layout_toStartOf="@+id/submit" />
 
     <Button
@@ -58,10 +51,11 @@
         android:layout_height="wrap_content"
         android:text="送信"
         android:id="@+id/submit"
-        android:layout_alignParentBottom="true"
+        android:layout_gravity="right"
+        android:layout_alignTop="@+id/editText"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="right" />
+        android:layout_alignParentEnd="true" />
+
 
 
 </RelativeLayout>
