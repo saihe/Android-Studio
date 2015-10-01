@@ -40,10 +40,14 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/saitokyohei/chat/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="89" column="24" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
+            <state vertical-scroll-proportion="10.203419">
+              <caret line="382" column="34" selection-start-line="382" selection-start-column="34" selection-end-line="382" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1446#1454#0" expanded="true" />
+                <element signature="e#1536#1563#0" expanded="true" />
+                <element signature="e#9386#10692#0" expanded="true" />
+                <element signature="e#10691#10692#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -79,9 +83,15 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-              <folding />
+            <state vertical-scroll-proportion="-26.034483">
+              <caret line="45" column="46" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
+              <folding>
+                <element signature="e#411#444#0" expanded="true" />
+                <element signature="e#1231#1266#0" expanded="true" />
+                <element signature="e#1300#1335#0" expanded="true" />
+                <element signature="e#1367#1400#0" expanded="true" />
+                <element signature="e#1435#1468#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1526,13 +1536,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/saitokyohei/chat/connectionLog.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ChatLog.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/saitokyohei/chat/Log.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/saitokyohei/chat/connectLog.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/saitokyohei/chat/ConnectLog.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/saitokyohei/chat/ChatLog.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/saitokyohei/chat/MainActivity.java" />
       </list>
     </option>
@@ -1756,6 +1766,8 @@
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../area" />
+    <property name="android.project.structure.last.selected" value="app" />
+    <property name="android.project.structure.proportion" value="0.15" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -1977,14 +1989,15 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2366931" sideWeight="0.5088889" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2751982" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2344281" sideWeight="0.4911111" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30577576" sideWeight="0.4911111" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2366931" sideWeight="0.5088889" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22333333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22333333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1995,7 +2008,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -2052,6 +2064,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1446#1454#0" expanded="true" />
+            <element signature="e#1536#1563#0" expanded="true" />
+            <element signature="e#9386#10692#0" expanded="true" />
+            <element signature="e#10691#10692#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2083,7 +2099,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
-          <folding />
+          <folding>
+            <element signature="e#411#444#0" expanded="true" />
+            <element signature="e#1231#1266#0" expanded="true" />
+            <element signature="e#1300#1335#0" expanded="true" />
+            <element signature="e#1367#1400#0" expanded="true" />
+            <element signature="e#1435#1468#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2093,6 +2115,10 @@
           <caret line="297" column="26" selection-start-line="297" selection-start-column="26" selection-end-line="297" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1446#1454#0" expanded="true" />
+            <element signature="e#1536#1563#0" expanded="true" />
+            <element signature="e#9386#10692#0" expanded="true" />
+            <element signature="e#10691#10692#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2124,7 +2150,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
-          <folding />
+          <folding>
+            <element signature="e#411#444#0" expanded="true" />
+            <element signature="e#1231#1266#0" expanded="true" />
+            <element signature="e#1300#1335#0" expanded="true" />
+            <element signature="e#1367#1400#0" expanded="true" />
+            <element signature="e#1435#1468#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2134,6 +2166,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1446#1454#0" expanded="true" />
+            <element signature="e#1536#1563#0" expanded="true" />
+            <element signature="e#9386#10692#0" expanded="true" />
+            <element signature="e#10691#10692#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2164,6 +2200,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1446#1454#0" expanded="true" />
+            <element signature="e#1536#1563#0" expanded="true" />
+            <element signature="e#9386#10692#0" expanded="true" />
+            <element signature="e#10691#10692#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2214,6 +2254,10 @@
           <caret line="108" column="22" selection-start-line="108" selection-start-column="22" selection-end-line="108" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1446#1454#0" expanded="true" />
+            <element signature="e#1536#1563#0" expanded="true" />
+            <element signature="e#9386#10692#0" expanded="true" />
+            <element signature="e#10691#10692#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2225,7 +2269,13 @@
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
-          <folding />
+          <folding>
+            <element signature="e#411#444#0" expanded="true" />
+            <element signature="e#1231#1266#0" expanded="true" />
+            <element signature="e#1300#1335#0" expanded="true" />
+            <element signature="e#1367#1400#0" expanded="true" />
+            <element signature="e#1435#1468#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2234,11 +2284,13 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/saitokyohei/chat/ConnectLog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58925474">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="65" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2252,33 +2304,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/saitokyohei/chat/ConnectLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="30" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="30" />
+        <state vertical-scroll-proportion="-26.034483">
+          <caret line="45" column="46" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
+          <folding>
+            <element signature="e#411#444#0" expanded="true" />
+            <element signature="e#1231#1266#0" expanded="true" />
+            <element signature="e#1300#1335#0" expanded="true" />
+            <element signature="e#1367#1400#0" expanded="true" />
+            <element signature="e#1435#1468#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5509259">
+          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/saitokyohei/chat/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="89" column="24" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
+        <state vertical-scroll-proportion="10.203419">
+          <caret line="382" column="34" selection-start-line="382" selection-start-column="34" selection-end-line="382" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1446#1454#0" expanded="true" />
+            <element signature="e#1536#1563#0" expanded="true" />
+            <element signature="e#9386#10692#0" expanded="true" />
+            <element signature="e#10691#10692#0" expanded="true" />
           </folding>
         </state>
       </provider>

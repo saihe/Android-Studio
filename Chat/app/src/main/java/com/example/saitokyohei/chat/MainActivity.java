@@ -1,17 +1,21 @@
 package com.example.saitokyohei.chat;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -21,13 +25,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.nio.Buffer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import android.os.Handler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends Activity {
 
@@ -41,6 +52,8 @@ public class MainActivity extends Activity {
     private LinearLayout ll;
     //int型の変数
     private int i = 0;
+    //過去ログ削除用
+    private int d = 0;
     //ログ一行分
     private ArrayList<String> log = new ArrayList<String>();
     //全ログ
@@ -56,44 +69,69 @@ public class MainActivity extends Activity {
     /*
      *TextViewを追加するメソッド
      */
-    private void addTextView(String msg){
+    private void addTextView(ArrayList<String> log){
         //テキスト作成・挿入
-        TextView tv = new TextView(this);
-        tv.setText(msg);
-        //ScrollViewの子のLinearLayoutのiDを取得しViewを追加
         ll = (LinearLayout) findViewById(R.id.sRelativeLayout);
-        ll.addView(tv, i);
-        i ++;
+        //子ビューのカウント・削除・カウント
+        int before = ll.getChildCount();
+        ll.removeAllViews();
+        int after = ll.getChildCount();
+        Log.d("", "before: " + before + "/ afeter: " + after);
+        //ScrollViewの子のLinearLayoutのiDを取得しViewを追加
+        for (int k = 0; k < log.size(); k++) {
+            int count = ll.getChildCount();
+            Log.d("", "ログ書き出し" + "/ coutn: " + count + "/ k: " + k + "/ i: " + i);
+            TextView tv = new TextView(this);
+            tv.setText(log.get(k) + "\n");
+            ll.addView(tv, k);
+            ll.setVerticalGravity(Gravity.TOP);
+            i++;
+        }
+        Log.d("", "for抜けた");
     }
 
+    /*
     private void editTextview(ArrayList<String> log){
-        TextView tv = new TextView(this);
-        //tv = (TextView) findViewById(R.id.textView);
+        tv = (TextView) findViewById(R.id.textView);
         for(int k = 0; k < log.size(); k++){
             tv.setText(log.get(k) + "\n");
-            i ++;
-            ll = (LinearLayout) findViewById(R.id.sRelativeLayout);
-            ll.addView(tv, i);
+
         }
     }
+    */
 
     private void inputClick(){
         try{
             Log.d("", "読み込み開始");
-            FileInputStream in = openFileInput( "test.txt" );
+            FileInputStream input = openFileInput( "log.json" );
+            Log.d("", "input: " + input);
             Log.d("", "test.txtを読み込み");
-            BufferedReader reader = new BufferedReader( new InputStreamReader( in , "UTF-8") );
-            String tmp;
+            BufferedReader reader = new BufferedReader( new InputStreamReader(input , "UTF-8") );
+            Log.d("", "reader: " + reader);
+            //JSON読み込み
+            JSONObject jsonObject = new JSONObject();
+            Log.d("", "01");
+            JSONArray jsonArray = jsonObject.getJSONArray("Log");
+            Log.d("", "02");
+            Log.d("", "jsonArray: " + jsonArray);
+            for(int j = 0; j < jsonArray.length(); j ++){
+                JSONObject jsonLog = jsonArray.getJSONObject(j);
+                Log.d("", "jsonLog" + jsonLog);
+            }
+            /*
             while( (tmp = reader.readLine()) != null ){
                 Log.d("", tmp);
                 log.add(tmp);
-                editTextview(log);
-            }
+                addTextView(log);
+            }*/
             Log.d("", "LogCatとTextViewに書き出し");
             reader.close();
         }catch( IOException e ){
-            e.printStackTrace();
             Log.e("", "読み込み失敗");
+            e.printStackTrace();
+        } catch (JSONException e) {
+            Log.e("", "Json読み込み失敗");
+            e.printStackTrace();
         }
     }
 
@@ -101,23 +139,49 @@ public class MainActivity extends Activity {
         //保存
         try{
             Log.d("", "保存開始");
-            FileOutputStream out = openFileOutput( "test.txt", MODE_PRIVATE );
-            Log.d("", "test.txtを読み込み");
+            FileOutputStream out = openFileOutput( "log.json", MODE_PRIVATE );
+            PrintWriter pw = new PrintWriter(out);
+            Log.d("", "書き出しのためのtest.txtを読み込み");
             for(String key: chatLog.keySet()){
-                out.write(key.getBytes());
-                out.write(chatLog.get(key).get(0).getBytes());
-                out.write(chatLog.get(key).get(1).getBytes());
+                Log.d("", "forの中");
+                //JSONへ変換
+                //中身作成
+                JSONObject jsonData = new JSONObject();
+                JSONObject jLog = new JSONObject();
+                JSONArray jsonArray = new JSONArray();
+                Log.d("", "json宣言");
+                //JSONオブジェクトへ変換(オブジェクト→配列→オブジェクト)
+                jsonData.put("Time", key);
+                Log.d("", jsonData.getJSONObject("Time").toString());
+                /*
+                jsonData.put("Name", chatLog.get(0).toString());
+                Log.d("", jsonData.getJSONObject("Name").toString());
+                jsonData.put("Mess", chatLog.get(1).toString());
+                Log.d("", jsonData.getJSONObject("Mess").toString());
+                jsonArray.put(jsonData);
+                Log.d("", jsonArray.toString());
+                jLog.put("Log", jsonArray);
+                jLog.put(key, chatLog.get(key));
+                */
+                Log.d("", "jLog: " + jLog.toString());
+                //ファイルへ書き出し
+                pw.write(jLog.toString());
+                pw.close();
             }
             Log.d("", "書き出し");
         }catch(IOException e ){
-            e.printStackTrace();
             Log.e("", "保存失敗");
+            e.printStackTrace();
+        } catch (JSONException e) {
+            Log.e("", "Jsonで失敗保存");
+            e.printStackTrace();
         }
     }
 
     /*
      *ログ書き出し・読み込み
      */
+    /*
     private  String setAndGetLog(){
         try{
             //setは保存されたログのオブジェクト一覧に書き出す
@@ -136,10 +200,12 @@ public class MainActivity extends Activity {
         }
         return "SetAndGet";
     }
+    */
 
     /*
      *接続テスト用
      */
+    /*
     public class Connection extends Thread{
         private boolean halt_;
 
@@ -172,10 +238,12 @@ public class MainActivity extends Activity {
             Log.d("", "StopConnection");
         }
     }
+    */
 
     /*
      *ログ受け取り
      */
+    /*
     public class GetLog extends Thread{
         private boolean halt_;
 
@@ -208,10 +276,12 @@ public class MainActivity extends Activity {
             Log.d("", "StopGetLog");
         }
     }
+    */
 
     /*
      * ログ送信
      */
+    /*
     public class SetLog extends Thread{
         private boolean halt_;
 
@@ -238,7 +308,7 @@ public class MainActivity extends Activity {
             Log.d("", "StopGetLog");
         }
     }
-
+    */
 
 
     @Override
@@ -248,7 +318,7 @@ public class MainActivity extends Activity {
         //ログに接続開始
         /*GetLog getLog =new GetLog();
         getLog.start();*/
-        log.add("Chat");
+        log.add("\n");
         inputClick();
         //ID:submitボタンをpushSubmitという変数と関連付ける
         pushSubmit = (Button) findViewById(R.id.submit);
@@ -277,22 +347,21 @@ public class MainActivity extends Activity {
                      */
                     //保存
                     outputClick();
+                    Log.d("", "output");
                     //読み込み
                     inputClick();
+                    Log.d("", "input");
                     /*
                      *ここまで
                      */
                     //ログに配列を書き込む・呼び出す
                     //setAndGetLog();
                     //入力フィールドを空にしてtextViewの文字を入力された文字に変更する
-                    ev.setText("");
-                    //TextVeiw作成・入力文字挿入・カウントアップ
-
+                    ev.setText("\n");
                 } catch (Exception e) {
                     //エラーメッセージを出す
                     String emsg = e.toString();
                     Log.e("", emsg);
-                    addTextView("View error: " + emsg);
                 }
             }
         });
@@ -321,17 +390,5 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    //テキスト保存
-    class InputClick implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            String str = ev.getText().toString();
-            try{
-                FileOutputStream out = openFileOutput( "chatLog.txt", MODE_PRIVATE );
-                out.write( str.getBytes()   );
-            }catch( IOException e ){
-                e.printStackTrace();
-            }
-        }
-    }
+
 }
