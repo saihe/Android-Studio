@@ -1,24 +1,34 @@
 package jp.co.july.tokyo.saitokyohei.sqlite2;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
 public class MainActivity extends Activity {
+    private String logTime = "";
     private MemoDao dao;
     private LinearLayout showData;
     private EditText dataEdit;
+    private Button button;
+    private String USER = "Kyontaro";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +51,6 @@ public class MainActivity extends Activity {
         changeData();
     }
 
-
     /**
      * 追加ボタンのクリックイベント
      * @param view
@@ -49,7 +58,17 @@ public class MainActivity extends Activity {
     public void addData(View view) {
 
         // データの追加
-        dao.insert(dataEdit.getText().toString());
+        //現在日時をyyyy/MM/dd HH:mm:ss形式で取得する.
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date(System.currentTimeMillis());
+        logTime =  df.format(date);
+        Log.d("", "logTime: " + logTime);
+        final ContentValues values = new ContentValues();
+        values.put("Time", logTime);
+        values.put("Name", USER);
+        values.put("Mess", dataEdit.getText().toString());
+        Log.d("", "values: " + values);
+        dao.insert(values.toString());
 
         // 入力欄のクリア
         dataEdit.setText(null);
@@ -92,13 +111,14 @@ public class MainActivity extends Activity {
                 InputMethodManager inputMethodManager =
                         (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
                 return true;
             }
 
             return false;
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
