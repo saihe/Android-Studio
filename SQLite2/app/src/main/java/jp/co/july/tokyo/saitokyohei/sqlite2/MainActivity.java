@@ -65,15 +65,15 @@ public class MainActivity extends Activity {
      */
     public void addData(View view) {
 
-        Log.d("", "DBへ渡すデータ作成");
+        Log.d("", "MainActivity.68 DBへ渡すデータ作成");
         // データの追加
         //現在日時をyyyy/MM/dd HH:mm:ss形式で取得する.
-        Log.d("", "日付取得");
+        Log.d("", "MainActivity.71 日付取得");
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         logTime =  df.format(date);
         Log.d("", "logTime: " + logTime);
-        Log.d("", "データ作成、日付・入力者・入力文字");
+        Log.d("", "MainActivity.76 データ作成、日付・入力者・入力文字");
         final ContentValues values = new ContentValues();
         values.put("Time", logTime);
         values.put("Name", USER);
@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
         dao.insert(values.toString());
 
         // 入力欄のクリア
-        Log.d("", "入力欄クリア");
+        Log.d("", "MainActivity.85 入力欄クリア");
         dataEdit.setText(null);
 
         // 表示データの更新
@@ -95,17 +95,17 @@ public class MainActivity extends Activity {
      */
     private void changeData() {
 
-        Log.d("", "表示データ更新開始");
+        Log.d("", "MainActivity.98 表示データ更新開始");
         // 表示中のデータを一旦すべてクリアする。
-        Log.d("", "表示欄クリア");
+        Log.d("", "MainActivity.100 表示欄クリア");
         showData.removeAllViews();
 
         // DBからすべてのデータを取得する。
-        Log.d("", "DBからデータ取得");
+        Log.d("", "MainActivity.104 DBからデータ取得");
         List<MyDBEntity> entityList = dao.findAll();
 
         // データを表示領域に追加する
-        Log.d("", "取得したデータを一行ずつ下に追加");
+        Log.d("", "MainActivity.108 取得したデータを一行ずつ下に追加");
         for(MyDBEntity entity: entityList) {
             TextView textView = new TextView(this);
             textView.setText(entity.getRowId() + "： " + entity.getValue());
@@ -119,12 +119,12 @@ public class MainActivity extends Activity {
 
         public boolean onKey(View view, int keyCode, KeyEvent event) {
 
-            Log.d("", "[Enter]を判定");
+            Log.d("", "MainActivity.122 [Enter]を判定");
             //EnterKeyが押されたかを判定
             if (event.getAction() == KeyEvent.ACTION_DOWN
                     && keyCode == KeyEvent.KEYCODE_ENTER) {
 
-                Log.d("", "キーボードを閉じる");
+                Log.d("", "MainActivity.127 キーボードを閉じる");
                 //ソフトキーボードを閉じる
                 InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
