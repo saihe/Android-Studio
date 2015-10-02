@@ -147,6 +147,16 @@ public class MainActivity extends Activity {
     }
     */
 
+    /*
+    削除メソッド
+    */
+    /*
+    public int delete(int rowId) {
+        String whereClause = COLUMN_ID + "=" + rowId;
+        return db.delete(TABLE_NAME, whereClause, null);
+    }
+    */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
