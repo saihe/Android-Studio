@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class MyDBHelper extends SQLiteOpenHelper {
 
@@ -29,12 +30,9 @@ public class MyDBHelper extends SQLiteOpenHelper {
      * @param factory
      * @param version
      */
-    public MyDBHelper(
-            Context context,
-            CursorFactory factory,
-            int version) {
-
+    public MyDBHelper(Context context, CursorFactory factory, int version) {
         super(context, DB_NAME, factory, version);
+        Log.d("", "MyDBHelperのコンストラクタ");
     }
 
     /**
@@ -42,6 +40,9 @@ public class MyDBHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("", "引数dbは MinActivity.java 41s行目で定義されている");
+        Log.d("", "テーブル作成SQL: create table memo(rowid integer primary key autoincrement, data text not null)");
+        Log.d("", "memo というテーブルを作る(IDはプライマリキーでA.I, データはテキストでnot null)");
         db.execSQL(CREATE_TABLE_SQL);
     }
 
@@ -50,7 +51,9 @@ public class MyDBHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.d("", "テーブル削除: drop table if exists memo → memoがあればドロップ");
         db.execSQL(DROP_TABLE_SQL);
+        Log.d("", "テーブル再作成");
         db.execSQL(CREATE_TABLE_SQL);
     }
 

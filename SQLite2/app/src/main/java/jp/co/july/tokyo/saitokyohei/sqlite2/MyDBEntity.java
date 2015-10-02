@@ -1,5 +1,7 @@
 package jp.co.july.tokyo.saitokyohei.sqlite2;
 
+import android.util.Log;
+
 /**
  * Created by saito.kyohei on 2015/10/01.
  */

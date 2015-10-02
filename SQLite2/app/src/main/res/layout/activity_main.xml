@@ -24,7 +24,9 @@
             android:layout_margin="0px"
             android:onClick="addData"/>
     </LinearLayout>
-
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
     <LinearLayout
         android:id="@+id/showData"
         android:layout_width="fill_parent"
@@ -33,5 +35,6 @@
         android:padding="0px"
         android:layout_marginTop="30px">
     </LinearLayout>
+</ScrollView>
 
 </LinearLayout>
